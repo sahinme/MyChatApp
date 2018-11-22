@@ -1,0 +1,17 @@
+{
+  "name": "mychatbook",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Muhammed Enes Şahin <40808896+freeadmiral@users.noreply.github.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chat",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/freeadmiral/MyChatBook",
+  "dependencies": {
+    "angular": "^1.7.5"
+  }
+}
