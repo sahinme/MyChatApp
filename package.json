@@ -12,6 +12,7 @@
     "dotenv": "^6.1.0",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "mongoose": "^5.3.13",
     "morgan": "~1.9.0",
     "nodemon": "^1.18.5",
     "pug": "2.0.0-beta11"
