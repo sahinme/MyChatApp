@@ -3,7 +3,8 @@ var router = express.Router();
 
 // Chat route
 router.get('/',(req, res, next)=> {
-  res.render('chat', { title: 'Chat Route' });
+  res.render('chat', { user:req.user });
+    console.log(req.user);
 });
 
 module.exports = router;

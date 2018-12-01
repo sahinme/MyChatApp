@@ -14,9 +14,11 @@ const chatRouter=require('./routes/chat');
 
 
 const app = express();
-
+// helpers
 const db=require('./helpers/db')();
 
+//middlewares
+const isAuthenticated=require('./middleware/isAuthenticated');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,8 +36,8 @@ app.use(sessions({
   secret: process.env.SESSION_SECRET_KEY,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true, maxAge:14*24*3600000 }
-}))
+  cookie: { maxAge:14*24*3600000 }
+}));
 
 //passport.js
 app.use(passport.initialize());
@@ -43,7 +45,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/chat',chatRouter);
+app.use('/chat',isAuthenticated,chatRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {
