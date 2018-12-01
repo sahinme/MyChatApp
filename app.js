@@ -4,14 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const dotenv=require('dotenv');
+const passport=require('passport');
+const sessions=require('express-session');
 dotenv.config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const chatRouter=require('./routes/chat');
+
 
 const app = express();
 
 const db=require('./helpers/db')();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,8 +29,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname,'bower_components')));
 
+// express session
+app.use(sessions({
+  secret: process.env.SESSION_SECRET_KEY,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true, maxAge:14*24*3600000 }
+}))
+
+//passport.js
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/chat',chatRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {

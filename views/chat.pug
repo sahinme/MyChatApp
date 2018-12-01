@@ -1,0 +1,12 @@
+extends layout
+
+append stylesheets
+  link(rel='stylesheet', href='/stylesheets/chat.css')
+
+block content
+  div(ng-controller="chatController")
+    h2 welcome chat route
+
+
+append javascripts
+  script(src="/javascripts/controller/chatController.js")
