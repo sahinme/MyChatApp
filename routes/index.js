@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Chat App' });
+  if(!req.user)
+    res.render('index', { title: 'Chat App' });
+  else
+    res.redirect('/chat');
 });
 
 module.exports = router;
