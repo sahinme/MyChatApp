@@ -16,8 +16,16 @@ io.on('connection',socket=>{
 
     onlineUsers.upsert(socket.id,socket.request.user);
 
+    onlineUsers.list(users=>{
+        console.log(users);
+    });
+
     socket.on('disconnect',()=>{
         onlineUsers.remove(socket.request.user.googleId);
+    });
+
+    onlineUsers.list(users=>{
+        console.log(users);
     });
 });
 
